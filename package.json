@@ -1,0 +1,37 @@
+{
+  "name": "musicplayer98",
+  "version": "1.0.0",
+  "description": "Simple Music Player With \"windows 98\" style.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel *.html",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alishi973/MusicPlayer98.git"
+  },
+  "keywords": [
+    "React",
+    "SoundCloud",
+    "98",
+    "styled-component"
+  ],
+  "author": "Ali Shirzad",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alishi973/MusicPlayer98/issues"
+  },
+  "homepage": "https://github.com/alishi973/MusicPlayer98#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1"
+  }
+}
