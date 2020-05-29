@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/alishi973/MusicPlayer98#readme",
   "dependencies": {
+    "98.css": "^0.1.16",
     "axios": "^0.19.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
