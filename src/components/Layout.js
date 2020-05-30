@@ -11,7 +11,12 @@ export default function Layout({ children }) {
           <button aria-label='Close'></button>
         </div>
       </div>
-      <div className='window-body'>{children}</div>
+      <div className='window-body'>
+        {children}
+        <div className="on-screen-player">
+          <div>lkagskdhjasd</div>
+        </div>
+      </div>
     </div>
   );
 }

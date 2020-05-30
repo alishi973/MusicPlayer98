@@ -1,21 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { getFeedMusic } from '../helpers/scrapper';
 import Axios from 'axios';
 export default function Home() {
+  const [songs, songsSet] = useState([]);
+  const [page, pageSet] = useState(1);
   useEffect(() => {
-    Axios.get('/browse/new-releases').then(({ data }) => {
-      console.log(data);
-    });
+    /* Axios.get(`nex1music.ir/page/${page}`).then(({ data }) => {
+      songsSet(getFeedMusic(data));
+    }); */
   }, []);
-  const loginComponent = () => (
-    <div>
-      <p>We Need To Login You To Play Songs For First Time</p>
-      <button>
-        <a
-          href={`https://accounts.spotify.com/authorize/?redirect_uri=${process.env.SPOTIFY_RU}&client_id=${process.env.SPOTIFY_CI}&response_type=token`}>
-          Login In spotify
-        </a>
-      </button>
-    </div>
-  );
-  return <div> {loginComponent} </div>;
+  return <div> {JSON.stringify(songs)} </div>;
 }

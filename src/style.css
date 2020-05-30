@@ -1,4 +1,31 @@
-body{
-    margin: 0;
-    height: 100%;
+body {
+  margin: 0;
+  height: 100%;
+}
+.window,
+html,
+#root {
+  height: 100%;
+}
+.window,
+.window-body {
+  position: relative;
+  /* overflow-x: hidden; */
+}
+
+.on-screen-player {
+  max-height: 10%;
+  min-height: 10%;
+
+  max-width: 100%;
+  min-width: 100%;
+
+  position: absolute;
+  z-index: 99;
+}
+
+.title-bar {
+  /* width: 100%; */
+  /* position: absolute; */
+  /* top: 0; */
 }

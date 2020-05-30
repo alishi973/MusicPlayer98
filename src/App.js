@@ -4,7 +4,8 @@ import { Router } from '@reach/router';
 import Axios from 'axios';
 import Routes from './routes';
 
-Axios.defaults.baseURL = 'https://api.spotify.com/v1';
+Axios.defaults.baseURL = 'https://cors-anywhere.herokuapp.com/';
+
 export default function App() {
   return (
     <Layout>
