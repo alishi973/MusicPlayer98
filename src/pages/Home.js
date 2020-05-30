@@ -9,5 +9,7 @@ export default function Home() {
       songsSet(getFeedMusic(data));
     }); */
   }, []);
-  return <div> {JSON.stringify(songs)} </div>;
+  return <div className="container">
+    
+  </div>;
 }

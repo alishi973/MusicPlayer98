@@ -1,4 +1,5 @@
 import React from 'react';
+import HoverAudioPlayer from './HoverAudioPlayer';
 
 export default function Layout({ children }) {
   return (
@@ -13,9 +14,7 @@ export default function Layout({ children }) {
       </div>
       <div className='window-body'>
         {children}
-        <div className="on-screen-player">
-          <div>lkagskdhjasd</div>
-        </div>
+        <HoverAudioPlayer />
       </div>
     </div>
   );
