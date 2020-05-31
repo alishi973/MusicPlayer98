@@ -1,7 +1,7 @@
 import React from 'react';
 import HoverAudioPlayer from './HoverAudioPlayer';
 
-export default function Layout({ children }) {
+const Layout = ({ children }) => {
   return (
     <div className='window'>
       <div className='title-bar'>
@@ -18,4 +18,6 @@ export default function Layout({ children }) {
       </div>
     </div>
   );
-}
+};
+
+export default Layout;

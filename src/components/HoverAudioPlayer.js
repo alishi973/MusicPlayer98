@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { CurrentMusic } from '../Context';
 
 const HoverAudioPlayer = (props) => {
-  const link =
-    'https://dl.nex1music.ir/1399/03/10/Omid%20Ashgaran%20-%20Majnoon%20[64].mp3?time=1590846796&filename=/1399/03/10/Omid%20Ashgaran%20-%20Majnoon%20[64].mp3';
+  /* const link =
+    'https://dl.nex1music.ir/1399/03/10/Omid%20Ashgaran%20-%20Majnoon%20[64].mp3?time=1590846796&filename=/1399/03/10/Omid%20Ashgaran%20-%20Majnoon%20[64].mp3'; */
+  const song = useContext(CurrentMusic);
   return (
     <div className='on-screen-player window'>
       <div className='title-bar' style={{ position: 'initial', padding: '3px 2px 3px 3px' }}>
@@ -14,14 +16,15 @@ const HoverAudioPlayer = (props) => {
       </div>
       <div className='window-body media-player '>
         <div className='art'>
-          <img src='https://nex1music.ir/upload/special_post/nex1music-kamran-moradi-negaran-to-nistam.jpg'></img>
+          {/* <img src='https://nex1music.ir/upload/special_post/nex1music-kamran-moradi-negaran-to-nistam.jpg'></img> */}
+          <img src={song.cover}></img>
         </div>
         <div className='song-info'>
-          <h5>title</h5>
+          <h5>{song.name}</h5>
           <div className='field-row'>
             <input id='range22' type='range' min='1' step='1' max='100' />
           </div>
-          <p>song</p>
+          <p>{song.artist}</p>
         </div>
       </div>
     </div>
