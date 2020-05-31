@@ -12,7 +12,10 @@ html,
 #root {
   height: 100%;
 }
-
+.window {
+  min-height: 100%;
+  height: max-content;
+}
 .window-body {
   padding-top: 20px;
   padding-bottom: 100px;
@@ -36,6 +39,7 @@ html,
   width: 100%;
   padding-right: 5px;
   position: fixed;
+  z-index: 99;
   top: 0;
 }
 
@@ -119,9 +123,14 @@ html,
   min-width: auto;
   max-width: 50px;
   min-height: 30px;
-  padding:0px 7px;
+  padding: 0px 7px;
 }
 .audio-card__art > img {
   width: 100%;
   height: auto;
+}
+.audio-card-container {
+  width: 100%;
+  text-decoration: none;
+  color: #222222;
 }
