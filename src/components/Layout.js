@@ -1,5 +1,6 @@
 import React from 'react';
 import HoverAudioPlayer from './HoverAudioPlayer';
+import { navigate } from '@reach/router';
 
 const Layout = ({ children }) => {
   return (
@@ -9,7 +10,7 @@ const Layout = ({ children }) => {
         <div className='title-bar-controls'>
           <button aria-label='Minimize'></button>
           <button aria-label='Maximize'></button>
-          <button aria-label='Close'></button>
+          <button onClick={() => navigate(-1)} aria-label='Close'></button>
         </div>
       </div>
       <div className='window-body'>

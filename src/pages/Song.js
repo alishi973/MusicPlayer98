@@ -13,8 +13,8 @@ const Song = (props) => {
 
     caches.open('v1').then((ca) => ca.add(finalLink)); //Add Audio To Cache
 
-    const newSong = { link: finalLink, name: song.Ensong, artist: song.Enartist, covert: song.image }; //Update Hoverable Music Box
-    currentMusic.setMusic((lastState) => Object.assign(lastState, newSong));
+    const newSong = { link: finalLink, name: song.Ensong, artist: song.Enartist, cover: song.image }; //Update Hoverable Music Box
+    currentMusic.musicSet(newSong);
   };
   useEffect(() => {
     Axios.get(`nex1music.ir/${props.songName}`).then(({ data }) => songDetailSet(getSong(data)));
