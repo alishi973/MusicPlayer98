@@ -26,16 +26,15 @@ const convertDivtoArray = (nodes) => {
 export const getSong = (songPageNode) => {
   const node = new DOMParser().parseFromString(songPageNode, 'text/html');
   let song = {};
-  console.log(node.querySelector('div.pscn > div.lnkdl'));
-  song.name = node.querySelector('div.pcnt > div > p:nth-child(4) > strong:nth-child(3) > a').innerText; //Fa Name Of song
-  song.artist = node.querySelector('div.pcnt > div > p:nth-child(4) > strong:nth-child(2) > a').innerText; // Fa name Of Artist
+  song.Fasong = node.querySelector('div.pcnt > div > p:nth-child(4) > strong:nth-child(3) > a').innerText; //Fa Name Of song
+  song.Faartist = node.querySelector('div.pcnt > div > p:nth-child(4) > strong:nth-child(2) > a').innerText; // Fa name Of Artist
 
   song.image = node.querySelector('div.pcnt > div > p:nth-child(6) > img').getAttribute('src'); //Image
 
   song.Ensong = node.querySelector('div.pcnt > div > p:nth-child(5) > strong:nth-child(2) > a').innerText; //En Name Of Song
   song.Enartist = node.querySelector('div.pcnt > div > p:nth-child(5) > strong:nth-child(1) > a').innerText; //En Name Of Artist
 
-  song.downloadLinks = [];
+  song.downloadLinks = []; //Song Download Link
   let downloadLinksNode = node.querySelector('div.pscn > div.lnkdl');
   for (let downloadLink of downloadLinksNode.children) {
     const quality = downloadLink.innerText.match(/\d+/);

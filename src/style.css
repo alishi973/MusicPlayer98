@@ -134,3 +134,26 @@ html,
   text-decoration: none;
   color: #222222;
 }
+.song-detail {
+  width: 100%;
+  overflow: hidden;
+  text-align: right;
+}
+.song-detail__image {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+}
+.dl-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  padding: 20px;
+}
+
+.dl-box__song {
+  width: 100%;
+  text-align: center;
+}

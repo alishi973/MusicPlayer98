@@ -4,7 +4,7 @@ import { Router } from '@reach/router';
 import Axios from 'axios';
 import Routes from './routes';
 
-Axios.defaults.baseURL = 'https://cors-anywhere.herokuapp.com/';
+Axios.defaults.baseURL = process.env.BASE_CORS;
 
 export default function App() {
   return (
