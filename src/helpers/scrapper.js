@@ -34,11 +34,21 @@ export const getSong = (songPageNode) => {
   song.Ensong = node.querySelector('div.pcnt > div > p:nth-child(5) > strong:nth-child(2) > a').innerText; //En Name Of Song
   song.Enartist = node.querySelector('div.pcnt > div > p:nth-child(5) > strong:nth-child(1) > a').innerText; //En Name Of Artist
 
-  song.downloadLinks = []; //Song Download Link
+  /* song.downloadLinks = []; //Song Download Link
   let downloadLinksNode = node.querySelector('div.pscn > div.lnkdl');
   for (let downloadLink of downloadLinksNode.children) {
     const quality = downloadLink.innerText.match(/\d+/);
     song.downloadLinks.push({ link: downloadLink.href, quality: quality && quality[0] });
+  } */
+
+  //Get Link From playBox
+  song.downloadLinks = []; //Song Download Link
+  let downloadLinksNode = node.querySelector('ul.tracklist');
+  for (let downloadLink of downloadLinksNode.children) {
+    const link = downloadLink.querySelector('div.details> i.play1').getAttribute("audiourl");
+    const quality = downloadLink.querySelector('div.details> div.name').innerText.match(/\d+/);
+    song.downloadLinks.push({ link, quality: quality && quality[0] });
   }
+  console.log(song)
   return song;
 };
