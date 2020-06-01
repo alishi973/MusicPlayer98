@@ -5,7 +5,7 @@ const HoverAudioPlayer = (props) => {
   /* const link =
     'https://dl.nex1music.ir/1399/03/10/Omid%20Ashgaran%20-%20Majnoon%20[64].mp3?time=1590846796&filename=/1399/03/10/Omid%20Ashgaran%20-%20Majnoon%20[64].mp3'; */
   const song = useContext(CurrentMusic).music;
-  console.log(song);
+  // console.log(song);
   return (
     <div className='on-screen-player window'>
       <div className='title-bar' style={{ position: 'initial', padding: '3px 2px 3px 3px' }}>
