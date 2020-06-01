@@ -17,7 +17,6 @@ const HoverAudioPlayer = (props) => {
       </div>
       <div className='window-body media-player '>
         <div className='art'>
-          {/* <img src='https://nex1music.ir/upload/special_post/nex1music-kamran-moradi-negaran-to-nistam.jpg'></img> */}
           <img src={song.cover}></img>
         </div>
         <div className='song-info'>
