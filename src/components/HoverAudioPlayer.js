@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { CurrentMusic } from '../Context';
 
-const HoverAudioPlayer = (props) => {
+const HoverAudioPlayer = () => {
   const song = useContext(CurrentMusic).music;
   // console.log(song);
   return (
