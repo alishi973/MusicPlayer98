@@ -35,7 +35,6 @@ export const getSong = (songPageNode) => {
     song.image = node.querySelector('div.pcnt > div > p:nth-child(10) > img').getAttribute('src'); //Image
     console.log(e);
   }
-
   song.Ensong = node.querySelector('div.pcnt > div > p:nth-child(5) > strong:nth-child(2) > a').innerText; //En Name Of Song
   song.Enartist = node.querySelector('div.pcnt > div > p:nth-child(5) > strong:nth-child(1) > a').innerText; //En Name Of Artist
 
