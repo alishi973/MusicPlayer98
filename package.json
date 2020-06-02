@@ -7,8 +7,9 @@
     "dev": "parcel *.html",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "parcel build index.html",
-    "predeploy":"npm run build",
-    "deploy":"gh-pages -d dist"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
+    "deployonly": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -38,6 +39,7 @@
     "babel-core": "^6.26.3",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
+    "cssnano": "^4.1.10",
     "gh-pages": "^3.0.0"
   }
 }

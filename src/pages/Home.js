@@ -13,6 +13,7 @@ export default function Home() {
   return (
     <div>
       <div className='container'>
+        <div> </div>
         {songs.length != 0 ? songs.map((eachSongs, i) => <MusicCard song={eachSongs} key={i} />) : <div className='loader'></div>}
       </div>
     </div>
