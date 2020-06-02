@@ -32773,7 +32773,9 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 var HoverAudioPlayer = function HoverAudioPlayer() {
   var song = (0, _react.useContext)(_Context.CurrentMusic).music;
   console.log(song);
-  if (song && song.name) return _react.default.createElement("div", {
+  if (song.name) return _react.default.createElement("div", {
+    className: "on-screen-player-container"
+  }, _react.default.createElement("div", {
     className: "on-screen-player window"
   }, _react.default.createElement("div", {
     className: "title-bar",
@@ -32805,7 +32807,7 @@ var HoverAudioPlayer = function HoverAudioPlayer() {
     min: "1",
     step: "1",
     max: "100"
-  })), _react.default.createElement("p", null, song.artist))));else {
+  })), _react.default.createElement("p", null, song.artist)))));else {
     return _react.default.createElement("div", null);
   }
 };
@@ -33011,12 +33013,25 @@ var getSong = function getSong(songPageNode) {
   try {
     for (_iterator.s(); !(_step = _iterator.n()).done;) {
       var downloadLink = _step.value;
-      var link = downloadLink.querySelector('div.details> i.play1').getAttribute('audiourl');
-      var quality = downloadLink.querySelector('div.details> div.name').innerText.match(/\d+/);
-      song.downloadLinks.push({
-        link: link,
-        quality: quality && quality[0]
-      });
+      console.log(downloadLink);
+
+      try {
+        var link = downloadLink.querySelector('div.details> i.play1').getAttribute('audiourl');
+        var quality = downloadLink.querySelector('div.details> div.name').innerText.match(/\d+/);
+        song.downloadLinks.push({
+          link: link,
+          quality: quality && quality[0]
+        });
+      } catch (e) {
+        var _link = downloadLink.querySelector('div.details> i.play').getAttribute('audiourl');
+
+        var _quality = downloadLink.querySelector('div.details> div.name').innerText.match(/\d+/);
+
+        song.downloadLinks.push({
+          link: _link,
+          quality: _quality && _quality[0]
+        });
+      }
     }
   } catch (err) {
     _iterator.e(err);
@@ -33082,7 +33097,7 @@ function Home() {
   }, []);
   return _react.default.createElement("div", null, _react.default.createElement("div", {
     className: "container"
-  }, songs.length != 0 ? songs.map(function (eachSongs, i) {
+  }, _react.default.createElement("div", null, " "), songs.length != 0 ? songs.map(function (eachSongs, i) {
     return _react.default.createElement(_MusicCard.default, {
       song: eachSongs,
       key: i
@@ -33381,7 +33396,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60924" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64601" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -13,13 +13,30 @@ body {
 html,
 #root {
   height: 100%;
+  overflow-x: hidden;
+  background-color: gray;
+}
+body,
+html,
+#root,
+.window-body {
+  max-width: 500px;
+  width: 100%;
+}
+html {
+  width: 100%;
+  min-width: 100%;
+  display: flex;
+  justify-content: center;
 }
 .window {
   min-height: 100%;
   height: max-content;
+  position: relative;
 }
 .window-body {
-  padding-top: 20px;
+  padding: 25px 10px;
+  margin: auto;
 }
 .loader {
   margin: auto;
@@ -29,7 +46,7 @@ html,
   border-radius: 50%;
   width: 75px;
   height: 75px;
-  animation: spin .5s linear infinite;
+  animation: spin 0.5s linear infinite;
 }
 
 @keyframes spin {
@@ -40,7 +57,10 @@ html,
     transform: rotate(360deg);
   }
 }
-
+.on-screen-player-container {
+  width: 100%;
+  /* position: fixed; */
+}
 .on-screen-player {
   max-height: 100px;
   min-height: 100px;
@@ -53,18 +73,24 @@ html,
   bottom: 0;
   left: 0;
   right: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .title-bar {
   width: 100%;
   padding-right: 5px;
-  position: fixed;
+  position: absolute;
   z-index: 99;
   top: 0;
 }
 
 .media-player {
-  padding: 0px;
+  min-width: 100%;
+  padding: 0px 5px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -126,7 +152,7 @@ html,
   padding-left: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
   position: relative;
 }
 .audio-card__info__stats {
@@ -158,6 +184,10 @@ html,
   width: 100%;
   overflow: hidden;
   text-align: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 .song-detail__image {
   width: 100%;
