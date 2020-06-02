@@ -4,6 +4,7 @@
   "description": "Simple Music Player With \"windows 98\" style.",
   "main": "index.js",
   "scripts": {
+    "serve":"serve -s dist",
     "dev": "parcel *.html",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "parcel build index.html",
@@ -26,7 +27,7 @@
   "bugs": {
     "url": "https://github.com/alishi973/MusicPlayer98/issues"
   },
-  "homepage": "https://github.com/alishi973/MusicPlayer98#readme",
+  "homepage": "https://alishi973.github.io/MusicPlayer98",
   "dependencies": {
     "98.css": "^0.1.16",
     "@reach/router": "^1.3.3",
