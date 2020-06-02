@@ -10,5 +10,11 @@ export default function Home() {
       songsSet(getFeedMusic(data));
     });
   }, []);
-  return <div className='container'>{songs && songs.map((eachSongs, i) => <MusicCard song={eachSongs} key={i} />)}</div>;
+  return (
+    <div>
+      <div className='container'>
+        {songs.length != 0 ? songs.map((eachSongs, i) => <MusicCard song={eachSongs} key={i} />) : <div className='loader'></div>}
+      </div>
+    </div>
+  );
 }

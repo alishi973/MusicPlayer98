@@ -34,13 +34,16 @@ const Song = (props) => {
       <h2>{songDetail.Ensong}</h2>
       <h4>{songDetail.Enartist}</h4>
       <div className='dl-box'>
-        {songDetail &&
+        {songDetail.Ensong ? (
           songDetail.downloadLinks &&
           songDetail.downloadLinks.map((eachLink, i) => (
             <button className='dl-box__song' key={i} onClick={() => playSong(eachLink, songDetail)}>
               <p>Play With {eachLink.quality || 'Orginal'} Quality </p>
             </button>
-          ))}
+          ))
+        ) : (
+          <div className='loader'></div>
+        )}
       </div>
     </div>
   );
