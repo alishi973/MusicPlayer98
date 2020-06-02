@@ -8,8 +8,5 @@ export const CurrentMusic = createContext(InitialValue.music);
 
 export default function Context({ children }) {
   const [music, musicSet] = useState({});
-  /* const setMusic = (props) => {
-    musicSet(props);
-  }; */
   return <CurrentMusic.Provider value={{ music, musicSet }}>{children}</CurrentMusic.Provider>;
 }

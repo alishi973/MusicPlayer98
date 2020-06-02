@@ -13,14 +13,14 @@ const MusicCard = ({ song }) => {
         <div className='audio-card__info'>
           <h4>{song.Ensong}</h4>
           <h5>{song.Enartist}</h5>
-          <a>Link</a>
+          {/* <a>Link</a> */}
           <div className='audio-card__info__stats'>
             <button>Play</button>
             <button>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 xlink='http://www.w3.org/1999/xlink'
-                ariaHidden='true'
+                aria-hidden='true'
                 focusable='false'
                 width='2em'
                 height='2em'

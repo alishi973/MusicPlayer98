@@ -29,7 +29,12 @@ export const getSong = (songPageNode) => {
   song.Fasong = node.querySelector('div.pcnt > div > p:nth-child(4) > strong:nth-child(3) > a').innerText; //Fa Name Of song
   song.Faartist = node.querySelector('div.pcnt > div > p:nth-child(4) > strong:nth-child(2) > a').innerText; // Fa name Of Artist
 
-  song.image = node.querySelector('div.pcnt > div > p:nth-child(6) > img').getAttribute('src'); //Image
+  try {
+    song.image = node.querySelector('div.pcnt > div > p:nth-child(6) > img').getAttribute('src'); //Image
+  } catch (e) {
+    song.image = node.querySelector('div.pcnt > div > p:nth-child(10) > img').getAttribute('src'); //Image
+    console.log(e);
+  }
 
   song.Ensong = node.querySelector('div.pcnt > div > p:nth-child(5) > strong:nth-child(2) > a').innerText; //En Name Of Song
   song.Enartist = node.querySelector('div.pcnt > div > p:nth-child(5) > strong:nth-child(1) > a').innerText; //En Name Of Artist
@@ -45,10 +50,10 @@ export const getSong = (songPageNode) => {
   song.downloadLinks = []; //Song Download Link
   let downloadLinksNode = node.querySelector('ul.tracklist');
   for (let downloadLink of downloadLinksNode.children) {
-    const link = downloadLink.querySelector('div.details> i.play1').getAttribute("audiourl");
+    const link = downloadLink.querySelector('div.details> i.play1').getAttribute('audiourl');
     const quality = downloadLink.querySelector('div.details> div.name').innerText.match(/\d+/);
     song.downloadLinks.push({ link, quality: quality && quality[0] });
   }
-  console.log(song)
+  console.log(song);
   return song;
 };
