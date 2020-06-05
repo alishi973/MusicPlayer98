@@ -4,8 +4,15 @@ import { Link } from '@reach/router';
 const playSongs = (link) => {};
 
 const MusicCard = ({ song }) => {
+  const onClick = () => {
+    // TODO:Add Catch For Song Page
+    /* const link = `/song/${song.link.split('/')[3]}`;
+    caches.open('v1').then((ca) => {
+      ca.add(link);
+    }); */
+  };
   return (
-    <Link className='audio-card-container' to={`/song/${song.link.split("/")[3]}`}>
+    <Link onClick={onClick} className='audio-card-container' to={`/song/${song.link.split('/')[3]}`}>
       <div className='audio-card'>
         <div className='audio-card__art'>
           <img src={song.image}></img>
