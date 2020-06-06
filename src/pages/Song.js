@@ -12,10 +12,23 @@ const Song = (props) => {
     const finalLink = process.env.BASE_CORS + link.split('https://')[1]; //Generate Audio File Link
 
     caches.open('v1').then((ca) => ca.add(finalLink)); //Add Audio To Cache
-
-    const newSong = { link: finalLink, name: song.Ensong, artist: song.Enartist, cover: song.image, isPlaying: true }; //Update Hoverable Music Box
+    currentMusic.music.song && currentMusic.music.song.pause();
+    let audio = new Audio(finalLink);
+    const newSong = {
+      link: finalLink,
+      name: song.Ensong,
+      artist: song.Enartist,
+      cover: song.image,
+      isPlaying: true,
+      song: audio,
+    }; //Update Hoverable Music Box
+    newSong.song.play();
+    newSong.song.addEventListener('timeupdate', (e) => {
+      currentMusic.musicSet((lastState) => ({ ...lastState, played: audio.currentTime, fulllenght: audio.duration }));
+    });
     currentMusic.musicSet(newSong);
   };
+
   useEffect(() => {
     Axios.get(`nex1music.ir/${props.songName}`).then(({ data }) => songDetailSet(getSong(data)));
   }, []);
