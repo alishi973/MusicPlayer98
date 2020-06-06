@@ -6,6 +6,7 @@ export default function Home() {
   const [songs, songsSet] = useState([]);
   const [page, pageSet] = useState(1);
   useEffect(() => {
+    document.title = 'Music App';
     Axios.get(`nex1music.ir/page/${page}`).then(({ data }) => {
       songsSet(getFeedMusic(data));
     });
