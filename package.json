@@ -7,11 +7,11 @@
     "serve": "serve -s dist",
     "dev": "parcel *.html",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "parcel build *.html",
-    "predeploy": "npm run _build",
+    "build": "parcel build index.html --public-url ./",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "deployonly": "gh-pages -d dist",
-    "_build": "set NODE_ENV=production | parcel build index.html"
+    "_build": "set NODE_ENV=production | parcel build index.html --public-url ./"
   },
   "repository": {
     "type": "git",
