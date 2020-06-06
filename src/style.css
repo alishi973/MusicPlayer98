@@ -117,12 +117,28 @@ html {
   width: 100%;
 }
 .song-info-trail {
-  background-color: red;
+  /* margin-top: 10px; */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0px 5px;
+}
+.song-info button {
+  margin: 0;
+  padding: 5px 10px;
+  min-height: auto;
+  min-width: auto;
 }
 .song-info > .field-row {
   width: 100%;
   margin: 5px;
   text-align: left;
+}
+.song-info > .field-row > p {
+  margin: 0 auto;
 }
 
 .container {

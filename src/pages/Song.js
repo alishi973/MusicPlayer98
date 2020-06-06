@@ -13,7 +13,7 @@ const Song = (props) => {
 
     caches.open('v1').then((ca) => ca.add(finalLink)); //Add Audio To Cache
 
-    const newSong = { link: finalLink, name: song.Ensong, artist: song.Enartist, cover: song.image }; //Update Hoverable Music Box
+    const newSong = { link: finalLink, name: song.Ensong, artist: song.Enartist, cover: song.image, isPlaying: true }; //Update Hoverable Music Box
     currentMusic.musicSet(newSong);
   };
   useEffect(() => {
