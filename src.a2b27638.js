@@ -32732,8 +32732,11 @@ var InitialValue = {
     link: '',
     name: '',
     artist: '',
-    covert: '',
-    played: 0
+    cover: '',
+    fulllenght: 0,
+    isPlaying: false,
+    played: 0,
+    song: null
   }
 };
 var CurrentMusic = (0, _react.createContext)(InitialValue.music);
@@ -32766,13 +32769,78 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _Context = require("../Context");
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 var HoverAudioPlayer = function HoverAudioPlayer() {
-  var song = (0, _react.useContext)(_Context.CurrentMusic).music;
-  console.log(song);
+  var _useContext = (0, _react.useContext)(_Context.CurrentMusic),
+      musicSet = _useContext.musicSet,
+      song = _useContext.music;
+
+  var currentTime = "0".concat(Math.floor(Math.floor(song.played) / 60), ":").concat(Math.floor(Math.floor(song.played) % 60));
+  var fullTime = "0".concat(Math.floor(Math.floor(song.fulllenght) / 60), ":").concat(Math.floor(Math.floor(song.fulllenght) % 60));
+
+  var playButton = _react.default.createElement("svg", {
+    "aria-hidden": "true",
+    focusable: "false",
+    width: "1em",
+    height: "1em",
+    style: {
+      transform: 'rotate(360deg)'
+    },
+    preserveAspectRatio: "xMidYMid meet",
+    viewBox: "0 0 24 24"
+  }, _react.default.createElement("path", {
+    d: "M5.536 21.886a1.004 1.004 0 0 0 1.033-.064l13-9a1 1 0 0 0 0-1.644l-13-9A1 1 0 0 0 5 3v18a1 1 0 0 0 .536.886z",
+    fill: "#626262"
+  }), _react.default.createElement("rect", {
+    x: "0",
+    y: "0",
+    width: "24",
+    height: "24",
+    fill: "rgba(0, 0, 0, 0)"
+  }));
+
+  var stopButton = _react.default.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    "aria-hidden": "true",
+    focusable: "false",
+    width: "1em",
+    height: "1em",
+    style: {
+      transform: 'rotate(360deg)'
+    },
+    preserveAspectRatio: "xMidYMid meet",
+    viewBox: "0 0 24 24"
+  }, _react.default.createElement("path", {
+    d: "M6 19h4V5H6v14zm8-14v14h4V5h-4z",
+    fill: "#626262"
+  }), _react.default.createElement("rect", {
+    x: "0",
+    y: "0",
+    width: "24",
+    height: "24",
+    fill: "rgba(0, 0, 0, 0)"
+  }));
+
+  var setRangeInterval = null;
+
+  var ActionButton = function ActionButton() {
+    return musicSet(function (lastState) {
+      lastState.isPlaying ? lastState.song.pause() : lastState.song.play();
+      return _extends({}, lastState, {
+        isPlaying: !lastState.isPlaying
+      });
+    });
+  };
+
+  var seek = function seek(e) {
+    return song.song.currentTime = e.target.value;
+  };
+
   if (song.name) return _react.default.createElement("div", {
     className: "on-screen-player-container"
   }, _react.default.createElement("div", {
@@ -32785,7 +32853,7 @@ var HoverAudioPlayer = function HoverAudioPlayer() {
     }
   }, _react.default.createElement("div", {
     className: "title-bar-text"
-  }, "Windows Media Player"), _react.default.createElement("div", {
+  }, song.artist, " - ", song.name), _react.default.createElement("div", {
     className: "title-bar-controls"
   }, _react.default.createElement("button", {
     "aria-label": "Maximize"
@@ -32799,15 +32867,46 @@ var HoverAudioPlayer = function HoverAudioPlayer() {
     src: song.cover
   })), _react.default.createElement("div", {
     className: "song-info"
-  }, _react.default.createElement("h5", null, song.name), _react.default.createElement("div", {
+  }, _react.default.createElement("div", {
     className: "field-row"
-  }, _react.default.createElement("input", {
-    id: "range22",
+  }, _react.default.createElement("p", null, currentTime), _react.default.createElement("input", {
+    className: "has-box-indicator",
     type: "range",
-    min: "1",
+    min: "0",
     step: "1",
-    max: "100"
-  })), _react.default.createElement("p", null, song.artist)))));else {
+    max: song.fulllenght,
+    value: song.played,
+    onChange: seek
+  }), _react.default.createElement("p", null, fullTime)), _react.default.createElement("div", {
+    className: "song-info-trail"
+  }, _react.default.createElement("p", null, "\xA0"), _react.default.createElement("button", {
+    onClick: ActionButton
+  }, song.isPlaying ? stopButton : playButton), _react.default.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    xlink: "http://www.w3.org/1999/xlink",
+    "aria-hidden": "true",
+    focusable: "false",
+    width: "2em",
+    height: "2em",
+    preserveAspectRatio: "xMidYMid meet",
+    viewBox: "0 0 72 72"
+  }, _react.default.createElement("path", {
+    fill: "#EA5A47",
+    d: "M59.5 25c0-6.904-5.596-12.5-12.5-12.5a12.497 12.497 0 0 0-11 6.56a12.497 12.497 0 0 0-11-6.56c-6.904 0-12.5 5.596-12.5 12.5c0 2.97 1.04 5.694 2.77 7.839l-.004.003L36 58.54l20.734-25.698l-.004-.003A12.44 12.44 0 0 0 59.5 25z"
+  }), _react.default.createElement("path", {
+    fill: "none",
+    stroke: "#000",
+    strokeLinejoin: "round",
+    strokeMiterlimit: "10",
+    strokeWidth: "2",
+    d: "M59.5 25c0-6.904-5.596-12.5-12.5-12.5a12.497 12.497 0 0 0-11 6.56a12.497 12.497 0 0 0-11-6.56c-6.904 0-12.5 5.596-12.5 12.5c0 2.97 1.04 5.694 2.77 7.839l-.004.003L36 58.54l20.734-25.698l-.004-.003A12.44 12.44 0 0 0 59.5 25z"
+  }), _react.default.createElement("rect", {
+    x: "0",
+    y: "0",
+    width: "72",
+    height: "72",
+    fill: "rgba(0, 0, 0, 0)"
+  })))))));else {
     return _react.default.createElement("div", null);
   }
 };
@@ -32884,9 +32983,19 @@ var playSongs = function playSongs(link) {};
 
 var MusicCard = function MusicCard(_ref) {
   var song = _ref.song;
+
+  var onClick = function onClick() {// TODO:Add Catch For Song Page
+
+    /* const link = `/song/${song.link.split('/')[3]}`;
+    caches.open('v1').then((ca) => {
+      ca.add(link);
+    }); */
+  };
+
   return _react.default.createElement(_router.Link, {
+    onClick: onClick,
     className: "audio-card-container",
-    to: "/song/".concat(song.link.split("/")[3])
+    to: "/song/".concat(song.link.split('/')[3])
   }, _react.default.createElement("div", {
     className: "audio-card"
   }, _react.default.createElement("div", {
@@ -33091,6 +33200,8 @@ function Home() {
       pageSet = _useState4[1];
 
   (0, _react.useEffect)(function () {
+    document.title = 'Music App';
+
     _axios.default.get("nex1music.ir/page/".concat(page)).then(function (_ref) {
       var data = _ref.data;
       songsSet((0, _scrapper.getFeedMusic)(data));
@@ -33123,6 +33234,8 @@ var _axios = _interopRequireDefault(require("axios"));
 
 var _scrapper = require("../helpers/scrapper");
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
@@ -33153,17 +33266,43 @@ var Song = function Song(props) {
     var link = e.link;
     var finalLink = "https://cors-anywhere.herokuapp.com/" + link.split('https://')[1]; //Generate Audio File Link
 
-    caches.open('v1').then(function (ca) {
-      return ca.add(finalLink);
-    }); //Add Audio To Cache
+    try {
+      caches.open('v1').then(function (ca) {
+        return ca.add(finalLink);
+      }); //Add Audio To Cache
+    } catch (error) {
+      console.log(error);
+    }
 
+    currentMusic.music.song && currentMusic.music.song.pause();
+    var audio = new Audio(finalLink);
+    console.log(songDetail);
+    audio.title = songDetail.Ensong; // x-webkit-airplay="" poster="" title=""
+
+    audio.setAttribute('poster', songDetail.image);
+    audio.setAttribute('x-webkit-airplay', songDetail.Enartist);
     var newSong = {
       link: finalLink,
       name: song.Ensong,
       artist: song.Enartist,
-      cover: song.image
+      cover: song.image,
+      isPlaying: true,
+      song: audio,
+      played: 0
     }; //Update Hoverable Music Box
 
+    newSong.song.play();
+    newSong.song.loop = true;
+    newSong.song.addEventListener('timeupdate', function (e) {
+      currentMusic.musicSet(function (lastState) {
+        return _extends({}, lastState, {
+          played: audio.currentTime,
+          fulllenght: audio.duration
+        });
+      });
+    });
+    newSong.song.crossOrigin = true;
+    console.log(newSong);
     currentMusic.musicSet(newSong);
   };
 
@@ -33174,12 +33313,17 @@ var Song = function Song(props) {
     });
   }, []);
   (0, _react.useEffect)(function () {
-    if (songDetail.image) {
-      caches.open('v1').then(function (ca) {
-        var imageLink = songDetail.image;
-        var finalImageLink = "https://cors-anywhere.herokuapp.com/" + imageLink.split('https://')[1];
-        ca.add(finalImageLink);
-      });
+    try {
+      if (songDetail.image) {
+        document.title = songDetail.Ensong;
+        caches.open('v1').then(function (ca) {
+          var imageLink = songDetail.image;
+          var finalImageLink = "https://cors-anywhere.herokuapp.com/" + imageLink.split('https://')[1];
+          ca.add(finalImageLink);
+        });
+      }
+    } catch (error) {
+      console.log(error);
     }
   }, [songDetail]);
   return _react.default.createElement("div", {
@@ -33405,7 +33549,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52445" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62103" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
