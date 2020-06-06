@@ -32,7 +32,7 @@ const HoverAudioPlayer = () => {
   );
 
   const ActionButton = () => {
-    musicSet((lastState) => Object.assign(lastState, { isPlaying: !lastState.isPlaying }));
+    musicSet((lastState) => ({ ...lastState, isPlaying: !lastState.isPlaying }));
   };
   if (song.name)
     return (
