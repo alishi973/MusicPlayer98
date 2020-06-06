@@ -3,6 +3,20 @@ import { CurrentMusic } from '../Context';
 import Axios from 'axios';
 import { getSong } from '../helpers/scrapper';
 
+const fetchSong = (event) => {
+  if (event.request.url === 'https://www.googleapis.com/drive/v3/files/fileID?alt=media') {
+    event.respondWith(
+      fetch(event.request.url, {
+        method: 'GET',
+        headers: {
+          Authorization: 'Bearer myBearerToken',
+        },
+        redirect: 'follow',
+      }),
+    );
+  }
+};
+
 const Song = (props) => {
   const [songDetail, songDetailSet] = useState({});
   const currentMusic = useContext(CurrentMusic);
@@ -11,8 +25,13 @@ const Song = (props) => {
     const link = e.link;
     const finalLink = process.env.BASE_CORS + link.split('https://')[1]; //Generate Audio File Link
 
-    caches.open('v1').then((ca) => ca.add(finalLink)); //Add Audio To Cache
+    try {
+      caches.open('v1').then((ca) => ca.add(finalLink)); //Add Audio To Cache
+    } catch (error) {
+      console.log(error);
+    }
     currentMusic.music.song && currentMusic.music.song.pause();
+
     let audio = new Audio(finalLink);
     const newSong = {
       link: finalLink,
@@ -21,12 +40,19 @@ const Song = (props) => {
       cover: song.image,
       isPlaying: true,
       song: audio,
+      played: 0,
     }; //Update Hoverable Music Box
     newSong.song.play();
     newSong.song.loop = true;
     newSong.song.addEventListener('timeupdate', (e) => {
       currentMusic.musicSet((lastState) => ({ ...lastState, played: audio.currentTime, fulllenght: audio.duration }));
     });
+    newSong.song.crossOrigin = true;
+    /* if ('webkitAudioContext' in window) {
+      
+    } */
+
+    console.log(newSong);
     currentMusic.musicSet(newSong);
   };
 
@@ -34,12 +60,16 @@ const Song = (props) => {
     Axios.get(`nex1music.ir/${props.songName}`).then(({ data }) => songDetailSet(getSong(data)));
   }, []);
   useEffect(() => {
-    if (songDetail.image) {
-      caches.open('v1').then((ca) => {
-        const imageLink = songDetail.image;
-        const finalImageLink = process.env.BASE_CORS + imageLink.split('https://')[1];
-        ca.add(finalImageLink);
-      });
+    try {
+      if (songDetail.image) {
+        caches.open('v1').then((ca) => {
+          const imageLink = songDetail.image;
+          const finalImageLink = process.env.BASE_CORS + imageLink.split('https://')[1];
+          ca.add(finalImageLink);
+        });
+      }
+    } catch (error) {
+      console.log(error);
     }
   }, [songDetail]);
   return (

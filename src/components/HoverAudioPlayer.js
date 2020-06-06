@@ -3,6 +3,8 @@ import { CurrentMusic } from '../Context';
 
 const HoverAudioPlayer = () => {
   const { musicSet, music: song } = useContext(CurrentMusic);
+  const currentTime = `0${Math.floor(Math.floor(song.played) / 60)}:${Math.floor(Math.floor(song.played) % 60)}`;
+  const fullTime = `0${Math.floor(Math.floor(song.fulllenght) / 60)}:${Math.floor(Math.floor(song.fulllenght) % 60)}`;
   const playButton = (
     <svg
       aria-hidden='true'
@@ -57,22 +59,9 @@ const HoverAudioPlayer = () => {
             </div>
             <div className='song-info'>
               <div className='field-row'>
-                <p>
-                  0{Math.floor(Math.floor(song.played) / 60)}:{Math.floor(Math.floor(song.played) % 60)}
-                </p>
-                <input
-                  className='has-box-indicator'
-                  type='range'
-                  min='0'
-                  step='1'
-                  max={song.fulllenght}
-                  value={song.played}
-                  defaultValue='0'
-                  onChange={seek}
-                />
-                <p>
-                  0{Math.floor(Math.floor(song.fulllenght) / 60)}:{Math.floor(Math.floor(song.fulllenght) % 60)}
-                </p>
+                <p>{currentTime}</p>
+                <input className='has-box-indicator' type='range' min='0' step='1' max={song.fulllenght} value={song.played} onChange={seek} />
+                <p>{fullTime}</p>
               </div>
               <div className='song-info-trail'>
                 <p>&nbsp;</p>
