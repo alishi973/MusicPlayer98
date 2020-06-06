@@ -168,6 +168,8 @@ html {
 }
 .audio-card__art {
   width: 85px;
+  max-width: 85px;
+  min-width: 85px;
 }
 .audio-card__info {
   width: 100%;

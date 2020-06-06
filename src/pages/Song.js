@@ -22,7 +22,6 @@ const Song = (props) => {
 
     console.log(songDetail);
     audio.title = songDetail.Ensong;
-    // x-webkit-airplay="" poster="" title=""
     audio.setAttribute('poster', songDetail.image);
     audio.setAttribute('x-webkit-airplay', songDetail.Enartist);
 
@@ -40,6 +39,10 @@ const Song = (props) => {
     newSong.song.addEventListener('timeupdate', (e) => {
       currentMusic.musicSet((lastState) => ({ ...lastState, played: audio.currentTime, fulllenght: audio.duration }));
     });
+    newSong.song.addEventListener('loadeddata', (e) => {
+      //Do Whatever When finished
+    });
+
     newSong.song.crossOrigin = true;
 
     console.log(newSong);
@@ -47,7 +50,14 @@ const Song = (props) => {
   };
 
   useEffect(() => {
-    Axios.get(`nex1music.ir/${props.songName}`).then(({ data }) => songDetailSet(getSong(data)));
+    Axios.get(`nex1music.ir/${props.songName}`).then((response) => {
+      try {
+        caches.open('v1').then((ca) => ca.put(`${process.env.BASE_CORS}nex1music.ir/${props.songName}`, new Response(response.data))); //Add Audio Page To Cache
+      } catch (error) {
+        console.log(error);
+      }
+      songDetailSet(getSong(response.data));
+    });
   }, []);
   useEffect(() => {
     try {
