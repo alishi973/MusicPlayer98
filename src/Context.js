@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 
 const InitialValue = {
-  music: { link: '', name: '', artist: '', cover: '',fulllenght:0, isPlaying: false, played: 0, audio: null },
+  music: { link: '', name: '', artist: '', cover: '',fulllenght:0, isPlaying: false, played: 0, song: null },
 };
 
 export const CurrentMusic = createContext(InitialValue.music);

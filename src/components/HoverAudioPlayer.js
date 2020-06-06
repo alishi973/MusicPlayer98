@@ -1,8 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { CurrentMusic } from '../Context';
 
-
-
 const HoverAudioPlayer = () => {
   const { musicSet, music: song } = useContext(CurrentMusic);
   const playButton = (
@@ -32,19 +30,14 @@ const HoverAudioPlayer = () => {
       <rect x='0' y='0' width='24' height='24' fill='rgba(0, 0, 0, 0)' />
     </svg>
   );
-  const setRangeInterval=null;
+  const setRangeInterval = null;
   const ActionButton = () => {
     return musicSet((lastState) => {
       lastState.isPlaying ? lastState.song.pause() : lastState.song.play();
       return { ...lastState, isPlaying: !lastState.isPlaying };
     });
   };
-  console.log("hi")
-  const seek = (e) => {
-
-    // console.log(e.currentTarget.value);
-    // musicSet((lastState) => ({ ...lastState, played: e.currentTarget.value }));
-  };
+  const seek = (e) => (song.song.currentTime = e.target.value);
   if (song.name)
     return (
       <div className='on-screen-player-container'>
@@ -65,7 +58,7 @@ const HoverAudioPlayer = () => {
             <div className='song-info'>
               <div className='field-row'>
                 <p>
-                  {Math.floor(Math.floor(song.played) / 60)}:{Math.floor(Math.floor(song.played) % 60)}
+                  0{Math.floor(Math.floor(song.played) / 60)}:{Math.floor(Math.floor(song.played) % 60)}
                 </p>
                 <input
                   className='has-box-indicator'
@@ -77,16 +70,8 @@ const HoverAudioPlayer = () => {
                   defaultValue='0'
                   onChange={seek}
                 />
-                {/* <input
-                  style={{ position: 'absolute', backgroundColor: 'red', opacity: '100', margin: 'auto', padding: '0px 4vh' }}
-                  min='0'
-                  step='1'
-                  max={song.fulllenght}
-                  type='range'
-                  onChange={seek}
-                /> */}
                 <p>
-                  {Math.floor(Math.floor(song.fulllenght) / 60)}:{Math.floor(Math.floor(song.fulllenght) % 60)}
+                  0{Math.floor(Math.floor(song.fulllenght) / 60)}:{Math.floor(Math.floor(song.fulllenght) % 60)}
                 </p>
               </div>
               <div className='song-info-trail'>

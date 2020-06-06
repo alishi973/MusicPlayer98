@@ -23,6 +23,7 @@ const Song = (props) => {
       song: audio,
     }; //Update Hoverable Music Box
     newSong.song.play();
+    newSong.song.loop = true;
     newSong.song.addEventListener('timeupdate', (e) => {
       currentMusic.musicSet((lastState) => ({ ...lastState, played: audio.currentTime, fulllenght: audio.duration }));
     });
