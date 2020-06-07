@@ -1,5 +1,6 @@
 {
-  "name": "App",
+  "name": "Music Player",
+  "default_locale": "en",
   "icons": [
     {
       "src": "./android-icon-36x36.png",
@@ -37,5 +38,12 @@
       "type": "image/png",
       "density": "4.0"
     }
-  ]
+  ],
+  "offline_enabled": true,
+  "orientation": "portrait",
+  "background_color": "lightgray",
+  "theme_color": "lightgray",
+  "scope": "/",
+  "start_url": "./index.html",
+  "display":"fullscreen"
 }
