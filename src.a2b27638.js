@@ -36419,10 +36419,10 @@ var Song = function Song(props) {
   };
 
   (0, _react.useEffect)(function () {
-    _axios.default.get("nex1music.ir/".concat(props.songName)).then(function (response) {
+    _axios.default.get("nex1music.ir/".concat(props.songName || props.match.params.songName)).then(function (response) {
       try {
         caches.open('v1').then(function (ca) {
-          return ca.put("".concat("https://cors-anywhere.herokuapp.com/", "nex1music.ir/").concat(props.songName), new Response(response.data));
+          return ca.put("".concat("https://cors-anywhere.herokuapp.com/", "nex1music.ir/").concat(props.songName || props.match.params.songName), new Response(response.data));
         }); //Add Audio Page To Cache
       } catch (error) {
         console.log(error);
@@ -36473,6 +36473,18 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+Object.defineProperty(exports, "Home", {
+  enumerable: true,
+  get: function () {
+    return _Home.default;
+  }
+});
+Object.defineProperty(exports, "Song", {
+  enumerable: true,
+  get: function () {
+    return _Song.default;
+  }
+});
 exports.default = void 0;
 
 var _Home = _interopRequireDefault(require("./Home"));
@@ -36494,72 +36506,26 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _pages = _interopRequireDefault(require("./pages"));
-
 var _react = _interopRequireDefault(require("react"));
+
+var _pages = _interopRequireDefault(require("./pages"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _default = [{
-  component: _pages.default.Home,
-  path: '/',
-  exact: true
-}, {
-  component: _pages.default.Song,
-  path: '/song/:songName',
-  exact: true
-}, {
   component: function component() {
     return _react.default.createElement("div", null, _react.default.createElement("div", null, "404"));
-  }
+  },
+  default: true
+}, {
+  component: _pages.default.Home,
+  path: '/'
+}, {
+  component: _pages.default.Song,
+  path: '/song/:songName'
 }];
 exports.default = _default;
-},{"./pages":"src/pages/index.js","react":"node_modules/react/index.js"}],"src/App.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.App1 = App1;
-exports.default = App;
-
-var _react = _interopRequireDefault(require("react"));
-
-var _reactRouterDom = require("react-router-dom");
-
-var _axios = _interopRequireDefault(require("axios"));
-
-var _Context = _interopRequireDefault(require("./Context"));
-
-var _Layout = _interopRequireDefault(require("./components/Layout"));
-
-var _routes = _interopRequireDefault(require("./routes"));
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-_axios.default.defaults.baseURL = "https://cors-anywhere.herokuapp.com/";
-
-function App1() {
-  return _react.default.createElement(_Context.default, null, _react.default.createElement(_Layout.default, null, _react.default.createElement(_reactRouterDom.BrowserRouter, null, _routes.default.map(function (EachRoute, i) {
-    return _react.default.createElement(EachRoute.component, _extends({
-      key: i
-    }, EachRoute));
-  }))));
-}
-
-function App() {
-  return _react.default.createElement(_Context.default, null, _react.default.createElement(_Layout.default, null, _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement(_reactRouterDom.Switch, null, _routes.default.map(function (EachRoute, i) {
-    return _react.default.createElement(_reactRouterDom.Route, _extends({
-      component: EachRoute.component
-    }, EachRoute, {
-      path: EachRoute.path,
-      key: i
-    }));
-  })))));
-}
-},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","axios":"node_modules/axios/index.js","./Context":"src/Context.js","./components/Layout":"src/components/Layout.js","./routes":"src/routes.js"}],"C:/Users/DanTDM/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./pages":"src/pages/index.js"}],"C:/Users/DanTDM/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -36591,7 +36557,141 @@ function getBaseURL(url) {
 
 exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
-},{}],"C:/Users/DanTDM/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+},{}],"C:/Users/DanTDM/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-loader.js":[function(require,module,exports) {
+var getBundleURL = require('./bundle-url').getBundleURL;
+
+function loadBundlesLazy(bundles) {
+  if (!Array.isArray(bundles)) {
+    bundles = [bundles];
+  }
+
+  var id = bundles[bundles.length - 1];
+
+  try {
+    return Promise.resolve(require(id));
+  } catch (err) {
+    if (err.code === 'MODULE_NOT_FOUND') {
+      return new LazyPromise(function (resolve, reject) {
+        loadBundles(bundles.slice(0, -1)).then(function () {
+          return require(id);
+        }).then(resolve, reject);
+      });
+    }
+
+    throw err;
+  }
+}
+
+function loadBundles(bundles) {
+  return Promise.all(bundles.map(loadBundle));
+}
+
+var bundleLoaders = {};
+
+function registerBundleLoader(type, loader) {
+  bundleLoaders[type] = loader;
+}
+
+module.exports = exports = loadBundlesLazy;
+exports.load = loadBundles;
+exports.register = registerBundleLoader;
+var bundles = {};
+
+function loadBundle(bundle) {
+  var id;
+
+  if (Array.isArray(bundle)) {
+    id = bundle[1];
+    bundle = bundle[0];
+  }
+
+  if (bundles[bundle]) {
+    return bundles[bundle];
+  }
+
+  var type = (bundle.substring(bundle.lastIndexOf('.') + 1, bundle.length) || bundle).toLowerCase();
+  var bundleLoader = bundleLoaders[type];
+
+  if (bundleLoader) {
+    return bundles[bundle] = bundleLoader(getBundleURL() + bundle).then(function (resolved) {
+      if (resolved) {
+        module.bundle.register(id, resolved);
+      }
+
+      return resolved;
+    }).catch(function (e) {
+      delete bundles[bundle];
+      throw e;
+    });
+  }
+}
+
+function LazyPromise(executor) {
+  this.executor = executor;
+  this.promise = null;
+}
+
+LazyPromise.prototype.then = function (onSuccess, onError) {
+  if (this.promise === null) this.promise = new Promise(this.executor);
+  return this.promise.then(onSuccess, onError);
+};
+
+LazyPromise.prototype.catch = function (onError) {
+  if (this.promise === null) this.promise = new Promise(this.executor);
+  return this.promise.catch(onError);
+};
+},{"./bundle-url":"C:/Users/DanTDM/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"src/App.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = App;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _reactRouterDom = require("react-router-dom");
+
+var _axios = _interopRequireDefault(require("axios"));
+
+var _Context = _interopRequireDefault(require("./Context"));
+
+var _Layout = _interopRequireDefault(require("./components/Layout"));
+
+var _routes = _interopRequireDefault(require("./routes"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+// import { Router } from '@reach/router';
+var Home = (0, _react.lazy)(function () {
+  return require("_bundle_loader")(require.resolve('./pages/Home'));
+});
+var Song = (0, _react.lazy)(function () {
+  return require("_bundle_loader")(require.resolve('./pages/Song'));
+});
+_axios.default.defaults.baseURL = "https://cors-anywhere.herokuapp.com/";
+
+var Loading = function Loading() {
+  return _react.default.createElement("div", null, "Loading...");
+};
+
+function App() {
+  return _react.default.createElement(_react.Suspense, {
+    fallback: _react.default.createElement(Loading, null)
+  }, _react.default.createElement(_Context.default, null, _react.default.createElement(_Layout.default, null, _react.default.createElement(_reactRouterDom.HashRouter, null, _react.default.createElement(_reactRouterDom.Switch, null, _react.default.createElement(_reactRouterDom.Route, {
+    path: "/",
+    component: Home,
+    exact: true
+  }), _react.default.createElement(_reactRouterDom.Route, {
+    path: "/song/:songName",
+    component: Song
+  }))))));
+}
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","axios":"node_modules/axios/index.js","./Context":"src/Context.js","./components/Layout":"src/components/Layout.js","./routes":"src/routes.js","_bundle_loader":"C:/Users/DanTDM/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-loader.js","./pages/Home":[["src.a2b27638.js","src/index.js"],"src.a2b27638.js.map","src.a2b27638.css","src/pages/Home.js"],"./pages/Song":[["src.a2b27638.js","src/index.js"],"src.a2b27638.js.map","src.a2b27638.css","src/pages/Song.js"]}],"C:/Users/DanTDM/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
 var bundle = require('./bundle-url');
 
 function updateLink(link) {
@@ -36681,7 +36781,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56996" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61218" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -36857,5 +36957,49 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["C:/Users/DanTDM/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","src/index.js"], null)
+},{}],"C:/Users/DanTDM/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/loaders/browser/css-loader.js":[function(require,module,exports) {
+module.exports = function loadCSSBundle(bundle) {
+  return new Promise(function (resolve, reject) {
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = bundle;
+
+    link.onerror = function (e) {
+      link.onerror = link.onload = null;
+      reject(e);
+    };
+
+    link.onload = function () {
+      link.onerror = link.onload = null;
+      resolve();
+    };
+
+    document.getElementsByTagName('head')[0].appendChild(link);
+  });
+};
+},{}],"C:/Users/DanTDM/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/loaders/browser/js-loader.js":[function(require,module,exports) {
+module.exports = function loadJSBundle(bundle) {
+  return new Promise(function (resolve, reject) {
+    var script = document.createElement('script');
+    script.async = true;
+    script.type = 'text/javascript';
+    script.charset = 'utf-8';
+    script.src = bundle;
+
+    script.onerror = function (e) {
+      script.onerror = script.onload = null;
+      reject(e);
+    };
+
+    script.onload = function () {
+      script.onerror = script.onload = null;
+      resolve();
+    };
+
+    document.getElementsByTagName('head')[0].appendChild(script);
+  });
+};
+},{}],0:[function(require,module,exports) {
+var b=require("C:/Users/DanTDM/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-loader.js");b.register("css",require("C:/Users/DanTDM/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/loaders/browser/css-loader.js"));b.register("js",require("C:/Users/DanTDM/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/loaders/browser/js-loader.js"));
+},{}]},{},["C:/Users/DanTDM/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js",0,"src/index.js"], null)
 //# sourceMappingURL=/src.a2b27638.js.map
