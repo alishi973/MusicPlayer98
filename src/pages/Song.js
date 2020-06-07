@@ -50,9 +50,11 @@ const Song = (props) => {
   };
 
   useEffect(() => {
-    Axios.get(`nex1music.ir/${props.songName}`).then((response) => {
+    Axios.get(`nex1music.ir/${props.songName || props.match.params.songName}`).then((response) => {
       try {
-        caches.open('v1').then((ca) => ca.put(`${process.env.BASE_CORS}nex1music.ir/${props.songName}`, new Response(response.data))); //Add Audio Page To Cache
+        caches
+          .open('v1')
+          .then((ca) => ca.put(`${process.env.BASE_CORS}nex1music.ir/${props.songName || props.match.params.songName}`, new Response(response.data))); //Add Audio Page To Cache
       } catch (error) {
         console.log(error);
       }

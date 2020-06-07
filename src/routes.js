@@ -1,5 +1,5 @@
-import pages from './pages';
 import React from 'react';
+import pages from './pages';
 export default [
   {
     component: () => (
