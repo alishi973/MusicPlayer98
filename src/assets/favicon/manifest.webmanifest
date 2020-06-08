@@ -43,7 +43,5 @@
   "orientation": "portrait",
   "background_color": "lightgray",
   "theme_color": "lightgray",
-  "scope": "/",
-  "start_url": "./index.html",
   "display":"fullscreen"
 }
