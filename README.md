@@ -1,14 +1,17 @@
-# MusicPlayer98
+### MusicPlayer98
+WebApp Music Player Using ``React``,``Parcel``,``Windows 98.css``
+Also Using ```CacheStorage``` For Saving Offline Song,
+PlayList Will be Added As Soon As possible
 
-## Music Player WebApp Using With ``React``,``Parcel``,``Windows 98.css``
+iOS is not Fully Supported!
 
-# Usage
-#### Development:
+### Usage:
+##### Development:
 ```
 npm run dev
 ```
 
-#### Production:
+##### Production:
 ```
 npm run build
 server -s build
