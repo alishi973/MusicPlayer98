@@ -1,6 +1,5 @@
 import * as React from 'react';
 import HoverAudioPlayer from './HoverAudioPlayer';
-import { navigate } from '@reach/router';
 import { CurrentMusic } from '../Context';
 
 const Layout = ({ children }) => {

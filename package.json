@@ -41,6 +41,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
+    "cssnano": "^4.1.10",
     "gh-pages": "^3.0.0",
     "sass": "^1.26.8",
     "typescript": "^3.9.5"
