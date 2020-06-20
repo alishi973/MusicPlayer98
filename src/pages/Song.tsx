@@ -1,9 +1,10 @@
-import React, { useEffect, useState, useContext } from 'react';
+import * as React from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { CurrentMusic } from '../Context';
 import Axios from 'axios';
 import { getSong } from '../helpers/scrapper';
 
-const Song = (props) => {
+const Song: React.FC<{ param: any }> = (props) => {
   const [songDetail, songDetailSet] = useState({});
   const currentMusic = useContext(CurrentMusic);
 
@@ -43,13 +44,14 @@ const Song = (props) => {
       //Do Whatever When finished
     });
 
-    newSong.song.crossOrigin = true;
+    // newSong.song.crossOrigin = true;
 
     console.log(newSong);
     currentMusic.musicSet(newSong);
   };
 
   useEffect(() => {
+    console.log(props)
     Axios.get(`nex1music.ir/${props.songName || props.match.params.songName}`).then((response) => {
       try {
         caches
@@ -89,8 +91,8 @@ const Song = (props) => {
             </button>
           ))
         ) : (
-          <div className='loader'></div>
-        )}
+            <div className='loader'></div>
+          )}
       </div>
     </div>
   );

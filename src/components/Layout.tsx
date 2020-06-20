@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import * as React from 'react';
 import HoverAudioPlayer from './HoverAudioPlayer';
 import { navigate } from '@reach/router';
 import { CurrentMusic } from '../Context';
 
 const Layout = ({ children }) => {
-  const currentMusic = useContext(CurrentMusic).music;
+  const currentMusic = React.useContext(CurrentMusic).music;
   return (
     <div className='window'>
       <div className='title-bar'>

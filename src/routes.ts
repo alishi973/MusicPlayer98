@@ -1,20 +1,16 @@
-import React from 'react';
 import pages from './pages';
 export default [
   {
-    component: () => (
-      <div>
-        <div>404</div>
-      </div>
-    ),
-    default: true,
-  },
-  {
     component: pages.Home,
     path: '/',
+    exact: true,
   },
   {
     component: pages.Song,
     path: '/song/:songName',
+    exact: true,
+  },
+  {
+    component: () => pages.NotFound,
   },
 ];

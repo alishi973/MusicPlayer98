@@ -50,7 +50,6 @@ export const getSong = (songPageNode) => {
   song.downloadLinks = []; //Song Download Link
   let downloadLinksNode = node.querySelector('ul.tracklist');
   for (let downloadLink of downloadLinksNode.children) {
-    console.log(downloadLink);
     try {
       const link = downloadLink.querySelector('div.details> i.play1').getAttribute('audiourl');
       const quality = downloadLink.querySelector('div.details> div.name').innerText.match(/\d+/);
@@ -61,6 +60,5 @@ export const getSong = (songPageNode) => {
       song.downloadLinks.push({ link, quality: quality && quality[0] });
     }
   }
-  console.log(song);
   return song;
 };

@@ -1,5 +1,4 @@
-import React from 'react';
-// import { Link } from '@reach/router';
+import * as React from 'react';
 import { Link } from 'react-router-dom';
 
 const playSongs = (link) => {};
@@ -13,7 +12,7 @@ const MusicCard = ({ song }) => {
     }); */
   };
   return (
-    <Link onClick={onClick} className='audio-card-container' to={`/song/${song.link.split('/')[3]}`}>
+    <Link onClick={onClick} className='audio-card-container' to={`./song/${song.link.split('/')[3]}`}>
       <div className='audio-card'>
         <div className='audio-card__art'>
           <img src={song.image}></img>
