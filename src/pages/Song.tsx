@@ -51,7 +51,6 @@ const Song: React.FC<{ param: any }> = (props) => {
   };
 
   useEffect(() => {
-    console.log(props)
     Axios.get(`nex1music.ir/${props.songName || props.match.params.songName}`).then((response) => {
       try {
         caches
