@@ -10,6 +10,7 @@ export default function Home() {
     document.title = 'Music App';
     Axios.get(`nex1music.ir/page/${page}`).then(({ data }) => {
       songsSet(getFeedMusic(data));
+      console.log(getFeedMusic(data))
     });
   }, []);
   return (

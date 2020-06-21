@@ -1,4 +1,4 @@
-export const getFeedMusic = (node) => convertDivtoArray(getMusicDiv(node));
+export const getFeedMusic: [Music] = (node) => convertDivtoArray(getMusicDiv(node));
 
 const getMusicDiv = (node) => new DOMParser().parseFromString(node, 'text/html').getElementsByClassName('ps anm');
 
@@ -23,7 +23,7 @@ const convertDivtoArray = (nodes) => {
   return musics;
 };
 
-export const getSong = (songPageNode) => {
+export const getSong = (songPageNode): Music => {
   const node = new DOMParser().parseFromString(songPageNode, 'text/html');
   let song = {};
   song.Fasong = node.querySelector('div.pcnt > div > p:nth-child(4) > strong:nth-child(3) > a').innerText; //Fa Name Of song
@@ -60,5 +60,14 @@ export const getSong = (songPageNode) => {
       song.downloadLinks.push({ link, quality: quality && quality[0] });
     }
   }
-  return song;
+  return { Ensong: song.Ensong, Enartist: song.Enartist, artist: song.Faartist, name: song.Fasong, link: song.downloadLinks };
 };
+
+interface Music {
+  Enartist: string,
+  Ensong: string,
+  artist: string,
+  name: string,
+  image: string,
+  link?: [string],
+}
