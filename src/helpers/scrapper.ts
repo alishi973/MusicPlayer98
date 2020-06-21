@@ -60,7 +60,8 @@ export const getSong = (songPageNode): Music => {
       song.downloadLinks.push({ link, quality: quality && quality[0] });
     }
   }
-  return { Ensong: song.Ensong, Enartist: song.Enartist, artist: song.Faartist, name: song.Fasong, link: song.downloadLinks };
+  console.log(song)
+  return { Ensong: song.Ensong, Enartist: song.Enartist, artist: song.Faartist, name: song.Fasong, downloadLinks: song.downloadLinks,image:song.image };
 };
 
 interface Music {
@@ -69,5 +70,6 @@ interface Music {
   artist: string,
   name: string,
   image: string,
-  link?: [string],
+  link: string,
+  downloadLinks?:[string]
 }
