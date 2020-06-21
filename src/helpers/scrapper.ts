@@ -1,4 +1,4 @@
-export const getFeedMusic: [Music] = (node) => convertDivtoArray(getMusicDiv(node));
+export const getFeedMusic = (node):[Music] => convertDivtoArray(getMusicDiv(node));
 
 const getMusicDiv = (node) => new DOMParser().parseFromString(node, 'text/html').getElementsByClassName('ps anm');
 
