@@ -30,7 +30,7 @@
   "homepage": "https://alishi973.github.io/MusicPlayer98",
   "dependencies": {
     "98.css": "^0.1.16",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "reac": "0.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
